@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+.p{
+    font-family: Inconsolata, serif;
+    color: #0004;
+}
+body {
+    font-family: 'Inconsolata', serif;
+}
