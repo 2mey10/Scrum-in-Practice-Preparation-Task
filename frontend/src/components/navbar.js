@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "react-router-dom";
+import {createContext, useContext} from "react";
+import AuthContext from "../context/AuthContext";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -35,6 +37,9 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const { user, logoutUser } = useContext(AuthContext);
+    console.log(user)
 
     return (
         <AppBar position="static">
@@ -124,15 +129,7 @@ function ResponsiveAppBar() {
                         >
                             {"Aufgabenstellung"}
                         </Button>
-                        {/*</Link>*/}
-                        {/*    <Button*/}
-                        {/*        key={"Accounts"}*/}
-                        {/*        component={Link}*/}
-                        {/*        to="/accounts"*/}
-                        {/*        sx={{ my: 2, color: 'white', display: 'block' }}*/}
-                        {/*    >*/}
-                        {/*        {"Accounts"}*/}
-                        {/*    </Button>*/}
+
                         <Button
                             key={"login"}
                             component={Link}
@@ -149,6 +146,7 @@ function ResponsiveAppBar() {
                         >
                             {"register"}
                         </Button>
+
                         <Button
                             key={"protected"}
                             component={Link}
@@ -157,20 +155,30 @@ function ResponsiveAppBar() {
                         >
                             {"protected"}
                         </Button>
-                        {/*<Button*/}
-                        {/*    key={"Login"}*/}
-                        {/*    onClick={handleCloseNavMenu}*/}
-                        {/*    sx={{ my: 2, color: 'white', display: 'block' }}*/}
-                        {/*>*/}
-                        {/*    {"Login"}*/}
-                        {/*</Button>*/}
-                            <Button
-                                key={"Sign-Up"}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {"Sign-Up"}
-                            </Button>
+
+
+
+                        {user?(
+
+                            <>
+                                <Button
+                                    key={"Logout"}
+                                    onClick={logoutUser}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    {"Logout"}
+                                </Button>
+
+                                <Typography>
+                                    Logged in
+                                </Typography>
+                            </>) : (
+                            <>
+                                <Typography>
+                                    Logged out
+                                </Typography>
+                            </>
+                        )}
 
                     </Box>
 
