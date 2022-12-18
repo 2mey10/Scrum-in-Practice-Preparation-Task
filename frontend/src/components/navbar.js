@@ -125,13 +125,45 @@ function ResponsiveAppBar() {
                             {"Aufgabenstellung"}
                         </Button>
                         {/*</Link>*/}
-                            <Button
-                                key={"Login"}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {"Login"}
-                            </Button>
+                        {/*    <Button*/}
+                        {/*        key={"Accounts"}*/}
+                        {/*        component={Link}*/}
+                        {/*        to="/accounts"*/}
+                        {/*        sx={{ my: 2, color: 'white', display: 'block' }}*/}
+                        {/*    >*/}
+                        {/*        {"Accounts"}*/}
+                        {/*    </Button>*/}
+                        <Button
+                            key={"login"}
+                            component={Link}
+                            to="/login"
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            {"login"}
+                        </Button>
+                        <Button
+                            key={"register"}
+                            component={Link}
+                            to="/register"
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            {"register"}
+                        </Button>
+                        <Button
+                            key={"protected"}
+                            component={Link}
+                            to="/protected"
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            {"protected"}
+                        </Button>
+                        {/*<Button*/}
+                        {/*    key={"Login"}*/}
+                        {/*    onClick={handleCloseNavMenu}*/}
+                        {/*    sx={{ my: 2, color: 'white', display: 'block' }}*/}
+                        {/*>*/}
+                        {/*    {"Login"}*/}
+                        {/*</Button>*/}
                             <Button
                                 key={"Sign-Up"}
                                 onClick={handleCloseNavMenu}

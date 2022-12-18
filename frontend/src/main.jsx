@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {Outlet} from "react-router-dom";
+import {Outlet, Route, Routes} from "react-router-dom";
 import ErrorPage from "./error-page";
 import {
     createBrowserRouter,
@@ -8,12 +8,16 @@ import {
 } from "react-router-dom";
 import Contact from "./routes/contact";
 import Root from "./routes/root";
-import Navbar from "./components/navbar";
 import Aufgabenstellung from "./routes/aufgabenstellung";
+import Login from "./views/LoginPage";
+import Register from "./views/RegisterPage";
+import Home from "./views/HomePage";
+import {PrivateRoute} from "./utils/PrivateRoute";
 
 const router = createBrowserRouter([
     {
-        path: "/",
+
+        path: "*",
         element: <Root />,
         errorElement: <ErrorPage />,
         children:[
@@ -21,17 +25,28 @@ const router = createBrowserRouter([
                 path: "contacts/:contactId",
                 element: <Contact />
             },
-            {
-                path:"aufgabenstellung/",
-                element: <Aufgabenstellung/>
-            }
+            // {
+            //     path:"aufgabenstellung/",
+            //     element: <Aufgabenstellung/>
+            // },
+            // {
+            //     path:"login/",
+            //     element: <Login/>
+            // },
+            // {
+            //     path:"register/",
+            //     element: <Register/>
+            // },
+            // {
+            //     path:"protected/",
+            //     element: <PrivateRoute/>
+            // }
         ]
     }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-
-        <RouterProvider router={router} />
+            <RouterProvider router={router} />
     </React.StrictMode>
 );
