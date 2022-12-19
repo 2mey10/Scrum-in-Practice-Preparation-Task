@@ -17,8 +17,9 @@ import {createContext, useContext} from "react";
 import AuthContext from "../context/AuthContext";
 import LensBlurIcon from '@mui/icons-material/LensBlur';
 
-const pages_logout = ["Aufgabenstellung","Protected","Login","Register"]
-const pages_login = ["Aufgabenstellung","Protected"]
+const pages_base = ["Aufgabenstellung","Protected"]
+const pages_logout = pages_base.concat(["Login","Register"])
+const pages_login = pages_base.concat(["Images"])
 
 function ResponsiveAppBar() {
     const { user, logoutUser } = useContext(AuthContext);
@@ -37,7 +38,7 @@ function ResponsiveAppBar() {
                 <Button
                     key={"Logout"}
                     onClick={logoutUser}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    sx={{ my: 2, color: '#063970', display: 'block' }}
                 >
                     {"Logout"}
                 </Button>

@@ -7,12 +7,13 @@ import Footer from "../components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {PrivateRoute,PrivateOutlet} from "../utils/PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
-import Home from "../views/HomePage";
-import Login from "../views/LoginPage";
-import Register from "../views/RegisterPage";
-import ProtectedPage from "../views/ProtectedPage";
+import Home from "./HomePage";
+import Login from "./LoginPage";
+import Register from "./RegisterPage";
+import ProtectedPage from "./ProtectedPage";
 import Aufgabenstellung from "./aufgabenstellung";
 import AuthContextProvider from '../context/AuthContext';
+import Images from "./Images";
 export default function Root() {
     return (
         <>
@@ -24,10 +25,8 @@ export default function Root() {
                     <Route element={<Login/>} path="/login" />
                     <Route element={<Register/>} path="/register" />
                     <Route element={<Home/>} path="/" />
-                    <Route exact path='/' element={<PrivateOutlet/>}>
-                        <Route exact path="/protected" element={<ProtectedPage/>}/>
-                    </Route>
-                    {/*<PrivateRoute component={ProtectedPage} path="/protected" exact />*/}
+                    <Route element={<ProtectedPage/>} path="/protected"/>
+                    <Route element={<Images/>} path = "/images"/>
                 </Routes>
                 </AuthProvider>
             </div>

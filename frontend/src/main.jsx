@@ -6,12 +6,11 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import Contact from "./routes/contact";
 import Root from "./routes/root";
 import Aufgabenstellung from "./routes/aufgabenstellung";
-import Login from "./views/LoginPage";
-import Register from "./views/RegisterPage";
-import Home from "./views/HomePage";
+import Login from "./routes/LoginPage";
+import Register from "./routes/RegisterPage";
+import Home from "./routes/HomePage";
 import {PrivateRoute} from "./utils/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -20,28 +19,6 @@ const router = createBrowserRouter([
         path: "*",
         element: <Root />,
         errorElement: <ErrorPage />,
-        children:[
-            {
-                path: "contacts/:contactId",
-                element: <Contact />
-            },
-            // {
-            //     path:"aufgabenstellung/",
-            //     element: <Aufgabenstellung/>
-            // },
-            // {
-            //     path:"login/",
-            //     element: <Login/>
-            // },
-            // {
-            //     path:"register/",
-            //     element: <Register/>
-            // },
-            // {
-            //     path:"protected/",
-            //     element: <PrivateRoute/>
-            // }
-        ]
     }
 ]);
 
