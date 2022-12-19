@@ -15,37 +15,54 @@ import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "react-router-dom";
 import {createContext, useContext} from "react";
 import AuthContext from "../context/AuthContext";
+import LensBlurIcon from '@mui/icons-material/LensBlur';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages_logout = ["Aufgabenstellung","Protected","Login","Register"]
+const pages_login = ["Aufgabenstellung","Protected"]
 
 function ResponsiveAppBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
     const { user, logoutUser } = useContext(AuthContext);
     console.log(user)
 
+
+    const style_login = {
+        display:"flex",
+        alignItems:"center"
+    }
+
+    const fetchLoginStatus = () => {
+        return user?(
+
+            <>
+                <Button
+                    key={"Logout"}
+                    onClick={logoutUser}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                    {"Logout"}
+                </Button>
+                <Box sx = {style_login}>
+                    <Typography>
+                        Logged in
+                    </Typography>
+                </Box>
+            </>) : (
+            <>
+                <Box sx = {style_login}>
+                    <Typography>
+                        Logged out
+                    </Typography>
+                </Box>
+
+            </>
+        )
+    }
+
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{bgcolor:"#2596be"}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <LensBlurIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -56,7 +73,6 @@ function ResponsiveAppBar() {
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
@@ -64,152 +80,29 @@ function ResponsiveAppBar() {
                         Scrum in Practice
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {/*<Link to={"contacts/1"}>*/}
+                        { user?
+                            (pages_login.map((page)=>(
                         <Button
                             component={Link}
-                            key={"Aufgabenstellung"}
-                            to="/aufgabenstellung"
+                            key={page}
+                            to={`/${page}`}
                             sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            {"Aufgabenstellung"}
-                        </Button>
-
-                        <Button
-                            key={"login"}
-                            component={Link}
-                            to="/login"
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            {"login"}
-                        </Button>
-                        <Button
-                            key={"register"}
-                            component={Link}
-                            to="/register"
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            {"register"}
-                        </Button>
-
-                        <Button
-                            key={"protected"}
-                            component={Link}
-                            to="/protected"
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            {"protected"}
-                        </Button>
-
-
-
-                        {user?(
-
-                            <>
+                            >
+                            {page}
+                        </Button>)))
+                            :
+                            (pages_logout.map((page)=>(
                                 <Button
-                                    key={"Logout"}
-                                    onClick={logoutUser}
+                                    component={Link}
+                                    key={page}
+                                    to={`/${page}`}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
-                                    {"Logout"}
-                                </Button>
-
-                                <Typography>
-                                    Logged in
-                                </Typography>
-                            </>) : (
-                            <>
-                                <Typography>
-                                    Logged out
-                                </Typography>
-                            </>
-                        )}
-
-                    </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                                    {page}
+                                </Button>)))
+                        }
+                        {fetchLoginStatus()}
                     </Box>
                 </Toolbar>
             </Container>
