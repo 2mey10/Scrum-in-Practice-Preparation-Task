@@ -4,30 +4,50 @@ import Container from "@mui/material/Container";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import ImageUploadButton from "../components/ImageDialog";
-import {Link} from "react-router-dom";
 import * as React from "react";
-import {ButtonBase, Card, CardMedia} from "@mui/material";
+import {ButtonBase, Card, CardMedia, TextField} from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import {Link} from "react-router-dom";
+import useAxios from "../utils/useAxios";
+import {useEffect, useState} from "react";
 
 
-const images = ["uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe"]
-const render_Images = () => {
+// const images = ["uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe"]
+
+
+const useRenderImages = () => {
+    const [images_, setImages] = useState([]);
+    const api = useAxios();
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("trying to fetch data")
+            try {
+                const response = await api.get("/allImages/");
+                setImages(response.data.response.image_paths);
+            } catch {
+                setImages("Something went wrong");
+            }
+        };
+        fetchData();
+    }, []);
+
+    console.log("images_ array:",images_)
     return <>
         <Grid2 container spacing={2} paddingLeft="10px" paddingTop="10px" paddingBottom="10px">
-            {images.map((img)=>(
+            {images_.map((img)=>(
                 <Grid2>
-                    <ButtonBase onClick={event => { }}>
+                    <ButtonBase component={Link} to={`/${img}`}>
                         <Card sx={{maxWidth:150, maxHeight:150}}>
                             <CardMedia
                                 component="img"
                                 height="150"
-                                image="static/images/contemplative-reptile.jpg"
+                                image={img}
                                 alt="green iguana"
                             />
                         </Card>
                     </ButtonBase>
                 </Grid2>
-
-
             ))
             }
         </Grid2>
@@ -59,7 +79,7 @@ export default function Images() {
                        width:"1000px",
                        alignItems:"center"}}>
 
-                       {render_Images()}
+                       {useRenderImages()}
                    </Box>
                 </Box>
             </Box>
