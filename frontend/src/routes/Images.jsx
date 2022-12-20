@@ -1,29 +1,27 @@
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import ImageUploadButton from "../components/ImageDialog";
 import * as React from "react";
 import {ButtonBase, Card, CardMedia, TextField} from "@mui/material";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
 import {Link} from "react-router-dom";
 import useAxios from "../utils/useAxios";
-import {useEffect, useState} from "react";
-
-
-// const images = ["uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe","uwu","owo","ewe"]
+import {useContext, useEffect, useState} from "react";
+import AuthContext from "../context/AuthContext";
+import axios from "axios";
+const baseURL = "http://127.0.0.1:8000/registration";
+const image_api = `${baseURL}/allImages/`
 
 
 const useRenderImages = () => {
+    const {user, logoutUser} = useContext(AuthContext);
     const [images_, setImages] = useState([]);
     const api = useAxios();
     useEffect(() => {
         const fetchData = async () => {
             console.log("trying to fetch data")
             try {
-                const response = await api.get("/allImages/");
+                // const response = await api.get("/allImages/");
+                const response = await axios.get(image_api);
                 setImages(response.data.response.image_paths);
             } catch {
                 setImages("Something went wrong");
@@ -38,7 +36,7 @@ const useRenderImages = () => {
             {images_.map((img)=>(
                 <Grid2>
                     <ButtonBase component={Link} to={`/${img}`}>
-                        <Card sx={{maxWidth:150, maxHeight:150}}>
+                        <Card sx={{minWidth:150,maxWidth:150,minHeight:150, maxHeight:150}}>
                             <CardMedia
                                 component="img"
                                 height="150"
@@ -50,6 +48,20 @@ const useRenderImages = () => {
                 </Grid2>
             ))
             }
+            {user ?
+                (
+            <>
+                <Grid2>
+                    <ImageUploadButton/>
+                </Grid2>
+            </>
+                ):
+                (
+            <>
+            </>
+                )
+            }
+
         </Grid2>
 
     </>
@@ -83,31 +95,6 @@ export default function Images() {
                    </Box>
                 </Box>
             </Box>
-
-
-            <Grid2 container spacing={2}>
-                <Grid2 xs={6} md={3}>
-                </Grid2>
-                <Grid2 xs={6} md={6}>
-                    <Container>
-                        <Box textAlign="center"
-                             display="flex"
-                             justifyContent="center"
-                             alignItems="center"
-                             sx={{
-                                 height: "400px"
-                             }}
-                         >
-                            <ImageUploadButton/>
-                        </Box>
-
-
-
-                    </Container>
-                </Grid2>
-                <Grid2 xs={6} md={3}>
-                </Grid2>
-            </Grid2>
         </div>
     );
 }

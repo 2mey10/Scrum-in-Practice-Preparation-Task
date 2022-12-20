@@ -17,9 +17,9 @@ import {createContext, useContext} from "react";
 import AuthContext from "../context/AuthContext";
 import LensBlurIcon from '@mui/icons-material/LensBlur';
 
-const pages_base = ["Aufgabenstellung","Protected"]
+const pages_base = ["Aufgabenstellung","Protected","Images"]
 const pages_logout = pages_base.concat(["Login","Register"])
-const pages_login = pages_base.concat(["Images"])
+const pages_login = pages_base.concat(["Notes"])
 
 function ResponsiveAppBar() {
     const { user, logoutUser } = useContext(AuthContext);

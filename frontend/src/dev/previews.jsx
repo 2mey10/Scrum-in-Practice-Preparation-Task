@@ -4,6 +4,7 @@ import {PaletteTree} from './palette';
 import ResponsiveAppBar from "../components/navbar";
 import Aufgabenstellung from "../routes/aufgabenstellung";
 import Root from "../routes/root";
+import Images from "../routes/Images";
 
 const ComponentPreviews = () => {
     return (
@@ -16,6 +17,9 @@ const ComponentPreviews = () => {
             </ComponentPreview>
             <ComponentPreview path="/Root">
                 <Root/>
+            </ComponentPreview>
+            <ComponentPreview path="/Images">
+                <Images/>
             </ComponentPreview>
         </Previews>
     );

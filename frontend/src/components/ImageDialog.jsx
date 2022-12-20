@@ -18,6 +18,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import {Card, CardMedia, TextField} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import UploadImages from "./UploadImages";
 function SimpleDialog(props) {
     const { onClose, selectedValue, open } = props;
 
@@ -33,32 +34,31 @@ function SimpleDialog(props) {
                 <Box sx={{ height:"500px"}}>
                     <Grid2 container spacing={2}>
                         <Grid2 xs={4}>
-                            {/*<Container sx={{backgroundColor:"red"}}>*/}
-                            {/*    <Button variant="outlined" fullWidth={true}>*/}
-                            {/*        uwu*/}
-                            {/*    </Button>*/}
-                            {/*</Container>*/}
                             <Grid2 container spacing={2}>
-                                <Grid2 xs={12}>
-                                    <Card sx={{maxWidth:345}}>
-                                        <CardMedia
-                                            component="img"
-                                            height="345"
-                                            image="static/images/contemplative-reptile.jpg"
-                                            alt="green iguana"
-                                        />
-                                    </Card>
-                                </Grid2>
+                                {/*<Grid2 xs={12}>*/}
+                                {/*    <Card sx={{maxWidth:345}}>*/}
+                                {/*        <CardMedia*/}
+                                {/*            component="img"*/}
+                                {/*            height="345"*/}
+                                {/*            image="static/images/contemplative-reptile.jpg"*/}
+                                {/*            alt="green iguana"*/}
+                                {/*        />*/}
+                                {/*    </Card>*/}
+                                {/*</Grid2>*/}
+
                                 <Grid2 xs={12}>
                                     <Typography sx={{ textAlign:"left"}}>
                                         Image Name: Lizardman
                                     </Typography>
                                 </Grid2>
                                 <Grid2 xs={12}>
-                                    <Button variant="outlined" sx={{ minWidth: 345, maxWidth:345}}>
-                                        Upload Image
-                                    </Button>
+                                    <UploadImages/>
                                 </Grid2>
+                                {/*<Grid2 xs={12}>*/}
+                                {/*    <Button variant="outlined" sx={{ minWidth: 345, maxWidth:345}}>*/}
+                                {/*        Upload Image*/}
+                                {/*    </Button>*/}
+                                {/*</Grid2>*/}
 
                             </Grid2>
                         </Grid2>
@@ -102,7 +102,7 @@ export default function ImageUploadButton() {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen} sx={{height:150, width: 150}}>
                 Upload Image
             </Button>
             <SimpleDialog
