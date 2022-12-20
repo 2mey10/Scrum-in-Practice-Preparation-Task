@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
     'rest_framework_swagger',
-    "drf_yasg"
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,11 @@ SIMPLE_JWT = {
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -125,7 +131,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

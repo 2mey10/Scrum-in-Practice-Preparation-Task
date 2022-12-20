@@ -5,10 +5,13 @@ from rest_framework_simplejwt.views import (
 from . import views
 
 urlpatterns = [
-    path("allImages/",views.getImagesEndPoint,name="getimages"),
+    path("allImagesOld/",views.getImagesEndPoint,name="getimages"),
     path("test/",views.testEndPoint,name="test"),
     path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', views.RegisterView.as_view(), name='auth_register'),
-    path('', views.getRoutes),
+    path("upload/", views.upload_image_endpoint),
+    path("all/",views.get_all_data_endpoint),
+    path("allImagesNew/",views.getImagesEndPointNew,name="getImagesNew"),
+    path("deleteAll/",views.deleteAllDataEndPoint,name="deleteAllData")
 ]
