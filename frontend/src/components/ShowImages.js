@@ -1,15 +1,12 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import {Alert, ButtonBase, Card, CardMedia, TextField} from "@mui/material";
-import useAxios from "../utils/useAxios";
+import {ButtonBase, Card, CardMedia, TextField} from "@mui/material";
 
 function SimpleImage(props) {
     const { onClose, selectedValue, open, img , title, description,user} = props;

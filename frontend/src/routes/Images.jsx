@@ -2,16 +2,9 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import ImageUploadButton from "../components/ImageDialog/ImageDialog";
 import * as React from "react";
-import {ButtonBase, Card, CardMedia, TextField} from "@mui/material";
-import {Link} from "react-router-dom";
-import useAxios from "../utils/useAxios";
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import ImageButton from "../components/ShowImages";
 
 
@@ -19,7 +12,7 @@ const baseURL = "http://127.0.0.1:8000/registration";
 const all_image_data = `${baseURL}/all/`
 
 const useRenderImages = () => {
-    const {user, logoutUser} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     const [data,setData] = useState([]);
 
     useEffect(() => {
