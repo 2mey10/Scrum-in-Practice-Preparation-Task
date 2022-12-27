@@ -5,7 +5,7 @@ import * as React from "react";
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
-import ImageButton from "../components/ShowImages";
+import ImageButton from "../components/ShowImageDetailed";
 
 
 const baseURL = "http://127.0.0.1:8000/registration";
@@ -36,10 +36,10 @@ const useRenderImages = () => {
                 data.map((image_data)=>(
                 <Grid2>
                     <ImageButton
-                        img={"static/images/" + image_data[2]}
-                        title={image_data[1]}
-                        description={image_data[3]}
-                        user={image_data[4]}
+                        img={"static/images/" + image_data.file_name}
+                        title={image_data.image_name}
+                        description={image_data.image_description}
+                        user={image_data.user}
                     />
                 </Grid2>
             ))

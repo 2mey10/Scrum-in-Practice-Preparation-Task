@@ -13,5 +13,6 @@ urlpatterns = [
     path("upload/", views.upload_image_endpoint),
     path("all/",views.get_all_data_endpoint),
     path("allImagesNew/",views.getImagesEndPointNew,name="getImagesNew"),
-    path("deleteAll/",views.deleteAllDataEndPoint,name="deleteAllData")
+    path("deleteAll/",views.deleteAllDataEndPoint,name="deleteAllData"),
+    path("getOneImage/",views.get_single_endpoint,name="get_one_image_test")
 ]

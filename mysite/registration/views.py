@@ -1,5 +1,7 @@
 import base64
 import io
+
+import cv2
 from django.forms.models import model_to_dict
 from django.shortcuts import render
 from rest_framework.response import Response
@@ -79,12 +81,7 @@ def getImagesEndPointNew(request):
 
         manager = ImageModel.objects
         all_entries = list(manager.values_list())
-        all_names = [el[1] for el in all_entries]
         all_images = [el[2] for el in all_entries]
-        all_descriptions = [el[3] for el in all_entries]
-        # Iterate directory
-
-        print(all_images)
         res_path = [relative_frontend_path + el for el in all_images]
 
         return Response({"response": {
@@ -101,11 +98,28 @@ def deleteAllDataEndPoint(request):
 def get_all_data_endpoint(request):
     manager = ImageModel.objects
     all_entries = manager.values_list()
+    keys = ["id","image_name","file_name","image_description","user"]
+    data = [{key:entry_data for key,entry_data in zip(keys,entry)} for entry in all_entries]
     return Response({
         "response":{
-            "data": all_entries
+            "data":data
         }
     })
+
+
+@api_view(['GET'])
+def get_single_endpoint(request):
+    #get file name
+    file_name = request.GET.get("file","aa.jpg")
+
+    # read in base64 image
+    image_folder = r"C:\Users\thbot\Desktop\UNIVERSITY\Master\Scrum in Practice\frontend\public\static\images"
+
+    file_path = os.path.join(image_folder,file_name)
+    with open(file_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+
+    return Response({"image_base64":encoded_string}, status=status.HTTP_200_OK)
 
 @api_view(["POST"])
 def upload_image_endpoint(request):

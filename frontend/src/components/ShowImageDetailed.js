@@ -7,12 +7,31 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import {ButtonBase, Card, CardMedia, TextField} from "@mui/material";
+import {useEffect, useState} from "react";
 
+const imageUrl = "https://i.imgur.com/fHyEMsl.jpg";
 function SimpleImage(props) {
     const { onClose, selectedValue, open, img , title, description,user} = props;
     const handleClose = () => {
         onClose(selectedValue);
     };
+
+
+    // fetch detailed image from API: imageURL needs to get provided as a prop :)
+    const [img_tutorial, setImg] = useState();
+
+    const fetchImage = async () => {
+        const res = await fetch(imageUrl);
+        const imageBlob = await res.blob();
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImg(imageObjectURL);
+    };
+
+    useEffect(() => {
+        fetchImage();
+    }, []);
+
+    //
     return (
         <Dialog onClose={handleClose} open={open} fullWidth={true} maxWidth={"lg"}>
             <DialogTitle >[{user}] </DialogTitle>
@@ -37,7 +56,7 @@ function SimpleImage(props) {
                                             <CardMedia
                                                 component="img"
                                                 height="345"
-                                                image={img}
+                                                image={img_tutorial} //usually img
                                                 alt="green iguana"
                                             />
                                         </Card>
